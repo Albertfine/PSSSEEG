@@ -1,22 +1,3 @@
-"""Time-series Generative Adversarial Networks (TimeGAN) Codebase.
-
-Reference: Jinsung Yoon, Daniel Jarrett, Mihaela van der Schaar, 
-"Time-series Generative Adversarial Networks," 
-Neural Information Processing Systems (NeurIPS), 2019.
-
-Paper link: https://papers.nips.cc/paper/8789-time-series-generative-adversarial-networks
-
-Last updated Date: April 24th 2020
-Code author: Jinsung Yoon (jsyoon0823@gmail.com)
-
------------------------------
-
-visualization_metrics.py
-
-Note: Use PCA or tSNE for generated and original data visualization
-"""
-
-# Necessary packages
 from sklearn.manifold import TSNE
 from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
