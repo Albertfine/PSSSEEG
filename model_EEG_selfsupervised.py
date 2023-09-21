@@ -588,7 +588,7 @@ class SwinTransformer(nn.Module):
             nn.init.constant_(m.weight, 1.0)
 
     def forward(self, x):
-        # x: [B, L, C]    ?
+        # x: [B, L, C]    
 
         # x = self.dtDW(x)
         # x = self.dtCONV(x)
@@ -619,16 +619,3 @@ def swin_eeg(window_size: int = 2, num_classes: int = 2, **kwargs):
                             **kwargs)
     return model
 
-
-'''
-def swin_eeg(window_size: int = 2, num_classes: int = 2, **kwargs):
-    model = SwinTransformer(in_chans=1,
-                            patch_size=4,
-                            window_size=window_size,
-                            embed_dim=96,
-                            depths=(2, 2, 6, 2),
-                            num_heads=(3, 6, 12, 24),
-                            num_classes=num_classes,
-                            **kwargs)
-    return model
-'''
