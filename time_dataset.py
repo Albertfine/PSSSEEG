@@ -43,16 +43,12 @@ def batch_mask(dataset, batch_size, ratio):
     ids_shuffle = torch.argsort(noise, dim=1)
     # ids_restore = torch.argsort(ids_shuffle, dim=1)
     
-    # 打乱顺序随机保存，只保存未被mask的位置
     ids_keep = ids_shuffle[:, :len_keep]
     batch_sample = torch.gather(batch, dim=1, index=ids_keep.unsqueeze(-1).repeat(1, 1, data_dim))
     
-        
-    # 同一时刻所有通道同时mask
     ids_mask = ids_shuffle[:, len_keep:]
     batch_mask = batch.scatter(1, ids_mask.unsqueeze(-1).repeat(1, 1, data_dim), 0)
     
-    # 同一时刻所有通道不同时mask
     random_noise = torch.zeros(batch_size, data_length, data_dim)
     ids_shuffle_random = torch.zeros([batch_size, data_length, data_dim],dtype=torch.int64, device=device)
     for i in range(batch_size):
