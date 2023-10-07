@@ -14,7 +14,6 @@ from torch.nn import functional as F
 
 from time_dataset import  batch_generator, batch_mask
 from visualization_metrics import visualization
-# import argparse
 
 
 class Net(nn.Module):
@@ -272,30 +271,9 @@ def visualize(dataset, device, generator, supervisor, recovery, batch_size, rati
             x_hat = recovery(h_hat)
     
 
-    # with torch.no_grad():
-    #     _,_,_,z = batch_mask(dataset, dataset_size, ratio)
-    #     z = z.to(device)
-    #     fz = torch.randn(dataset_size, seq_len, input_size).to(device)
-        
-    #     e_hat = torch.cat((generator(z[:dataset_size//3]), 
-    #                        generator(z[dataset_size//3:dataset_size*2//3]), 
-    #                        generator(z[dataset_size*2//3:])), dim=0)
-    #     h_hat = torch.cat((supervisor(e_hat[:dataset_size//3]),
-    #                        supervisor(e_hat[dataset_size//3:dataset_size*2//3]),
-    #                        supervisor(e_hat[dataset_size*2//3:])), dim=0)
-    #     x_hat = torch.cat((recovery(h_hat[:dataset_size//3]),
-    #                        recovery(h_hat[dataset_size//3:dataset_size*2//3]),
-    #                        recovery(h_hat[dataset_size*2//3:])), dim=0)
 
-    generated_data_curr = x_hat.cpu().numpy()
-    generated_data_origin = x_origin.cpu().numpy()
-    # generated_data = list()
-    # for i in range(dataset_size):
-    #     temp = generated_data_curr[i, :, :]
-    #     generated_data.append(temp)
-
-    visualization(dataset, generated_data_curr, "pca")
-    visualization(dataset, generated_data_curr, "tsne")
+    # visualization(dataset, generated_data_curr, "pca")
+    # visualization(dataset, generated_data_curr, "tsne")
     
     return generated_data_curr, generated_data_origin
 
