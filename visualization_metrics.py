@@ -5,18 +5,10 @@ import numpy as np
 
 
 def visualization(ori_data, generated_data, analysis):
-    """Using PCA or tSNE for generated and original data visualization.
-  
-  Args:
-    - ori_data: original data
-    - generated_data: generated synthetic data
-    - analysis: tsne or pca
-  """
-    # Analysis sample size (for faster computation)
+
     anal_sample_no = min([1000, len(ori_data)])
     idx = np.random.permutation(len(ori_data))[:anal_sample_no]
 
-    # Data preprocessing
     ori_data = np.asarray(ori_data)
     # generated_data = np.asarray(generated_data)
 
@@ -37,7 +29,6 @@ def visualization(ori_data, generated_data, analysis):
                 (prep_data_hat, np.reshape(np.mean(generated_data[i, :, :], 1), [1, seq_len]))
             )
 
-    # Visualization parameter
     colors = ["red" for i in range(anal_sample_no)] + ["blue" for i in range(anal_sample_no)]
 
     if analysis == "pca":
@@ -72,14 +63,11 @@ def visualization(ori_data, generated_data, analysis):
 
     elif analysis == "tsne":
 
-        # Do t-SNE Analysis together
         prep_data_final = np.concatenate((prep_data, prep_data_hat), axis=0)
 
-        # TSNE anlaysis
         tsne = TSNE(n_components=2, verbose=1, perplexity=40, n_iter=300)
         tsne_results = tsne.fit_transform(prep_data_final)
 
-        # Plotting
         f, ax = plt.subplots(1)
 
         plt.scatter(
